@@ -22,7 +22,7 @@
 #include <stdint.h>
 #include <unistd.h>
 
-#define CH_NO 4 // Number of channels
+#define CH_NO 8 // Number of channels
 #define BUFFER_SIZE 1024*512
 
 

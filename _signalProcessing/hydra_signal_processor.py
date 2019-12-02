@@ -114,11 +114,15 @@ class SignalProcessor(QtCore.QThread):
         self.RD_matrix_last = np.ones((10,10))
         self.RD_matrix_last_2 = np.ones((10,10))
         self.RD_matrix_last_3 = np.ones((10,10))
+        self.RD_matrix_last_4 = np.ones((10,10))
+        self.RD_matrix_last_5 = np.ones((10,10))
+        self.RD_matrix_last_6 = np.ones((10,10))
+        self.RD_matrix_last_7 = np.ones((10,10))
         
         self.center_freq = 0  # TODO: Initialize this [Hz]
         self.fs = 1.024 * 10**6  # Decimated sampling frequncy - Update from GUI
         #self.sample_size = 2**15
-        self.channel_number = 4
+        self.channel_number = 8
         
         # Processing parameters        
         self.test = None

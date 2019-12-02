@@ -27,7 +27,7 @@
 //2097152 - Buff size for real work
 //#define BUFFER_SIZE 128 * 1024 //128*1024 // Sample 
 #define BUFFER_NO 2  // Buffer number
-#define CHANNEL_NO 4 // Channel number
+#define CHANNEL_NO 8 // Channel number
 #define CFN "_receiver/C/sync_control_fifo" // Name of the gate control fifo - Control FIFO name
 
 int BUFFER_SIZE = 0;

@@ -104,16 +104,26 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.win_spectrum.nextRow()
         self.plotWidget_spectrum_ch3 = self.win_spectrum.addPlot(title="Channel 3")
         self.plotWidget_spectrum_ch4 = self.win_spectrum.addPlot(title="Channel 4")
+        self.win_spectrum.nextRow()
+        self.plotWidget_spectrum_ch5 = self.win_spectrum.addPlot(title="Channel 5")
+        self.plotWidget_spectrum_ch6 = self.win_spectrum.addPlot(title="Channel 6")
+        self.win_spectrum.nextRow()
+        self.plotWidget_spectrum_ch7 = self.win_spectrum.addPlot(title="Channel 7")
+        self.plotWidget_spectrum_ch8 = self.win_spectrum.addPlot(title="Channel 8")
 
         self.gridLayout_spectrum.addWidget(self.win_spectrum, 1, 1, 1, 1)
 
         x = np.arange(1000)
-        y = np.random.normal(size=(4,1000))
+        y = np.random.normal(size=(8,1000))
 
         self.spectrum_ch1_curve = self.plotWidget_spectrum_ch1.plot(x, y[0], clear=True, pen=(255, 199, 15))
         self.spectrum_ch2_curve = self.plotWidget_spectrum_ch2.plot(x, y[1], clear=True, pen='r')
         self.spectrum_ch3_curve = self.plotWidget_spectrum_ch3.plot(x, y[2], clear=True, pen='g')
         self.spectrum_ch4_curve = self.plotWidget_spectrum_ch4.plot(x, y[3], clear=True, pen=(9, 237, 237))
+        self.spectrum_ch5_curve = self.plotWidget_spectrum_ch5.plot(x, y[4], clear=True, pen=(255, 199, 15))
+        self.spectrum_ch6_curve = self.plotWidget_spectrum_ch6.plot(x, y[5], clear=True, pen='r')
+        self.spectrum_ch7_curve = self.plotWidget_spectrum_ch7.plot(x, y[6], clear=True, pen='g')
+        self.spectrum_ch8_curve = self.plotWidget_spectrum_ch8.plot(x, y[7], clear=True, pen=(9, 237, 237))
 
 
         self.plotWidget_spectrum_ch1.setLabel("bottom", "Frequency [MHz]")
@@ -124,6 +134,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.plotWidget_spectrum_ch3.setLabel("left", "Amplitude [dBm]")
         self.plotWidget_spectrum_ch4.setLabel("bottom", "Frequency [MHz]")
         self.plotWidget_spectrum_ch4.setLabel("left", "Amplitude [dBm]")
+        self.plotWidget_spectrum_ch5.setLabel("bottom", "Frequency [MHz]")
+        self.plotWidget_spectrum_ch5.setLabel("left", "Amplitude [dBm]")
+        self.plotWidget_spectrum_ch6.setLabel("bottom", "Frequency [MHz]")
+        self.plotWidget_spectrum_ch6.setLabel("left", "Amplitude [dBm]")
+        self.plotWidget_spectrum_ch7.setLabel("bottom", "Frequency [MHz]")
+        self.plotWidget_spectrum_ch7.setLabel("left", "Amplitude [dBm]")
+        self.plotWidget_spectrum_ch8.setLabel("bottom", "Frequency [MHz]")
+        self.plotWidget_spectrum_ch8.setLabel("left", "Amplitude [dBm]")
 
         #---> Sync display <---
         # --> Delay
@@ -350,12 +368,16 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def pb_rec_reconfig_clicked(self):
         center_freq = self.doubleSpinBox_center_freq.value() *10**6
         sample_rate = float(self.comboBox_sampling_freq.currentText()) *10**6 #self.doubleSpinBox_sampling_freq.value()*10**6
-        gain = [0,0,0,0]
+        gain = [0,0,0,0,0,0,0,0]
         if self.checkBox_en_uniform_gain.checkState():
             gain[0] = 10*float(self.comboBox_gain.currentText())
             gain[1] = 10*float(self.comboBox_gain.currentText())
             gain[2] = 10*float(self.comboBox_gain.currentText())
             gain[3] = 10*float(self.comboBox_gain.currentText())
+            gain[4] = 10*float(self.comboBox_gain.currentText())
+            gain[5] = 10*float(self.comboBox_gain.currentText())
+            gain[6] = 10*float(self.comboBox_gain.currentText())
+            gain[7] = 10*float(self.comboBox_gain.currentText())
             gain_index = self.comboBox_gain.currentIndex()
             self.module_receiver.receiver_gain = 10*float(self.comboBox_gain.currentText())
             form.comboBox_gain_2.setCurrentIndex(int(gain_index))
@@ -367,11 +389,28 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             form.comboBox_gain_4.setCurrentIndex(int(gain_index))
             form.comboBox_gain_4.setEnabled(False)
             self.module_receiver.receiver_gain_4 = 10*float(self.comboBox_gain.currentText())
+
+            form.comboBox_gain_5.setCurrentIndex(int(gain_index))
+            form.comboBox_gain_5.setEnabled(False)
+            self.module_receiver.receiver_gain_5 = 10*float(self.comboBox_gain.currentText())
+            form.comboBox_gain_6.setCurrentIndex(int(gain_index))
+            form.comboBox_gain_6.setEnabled(False)
+            self.module_receiver.receiver_gain_6 = 10*float(self.comboBox_gain.currentText())
+            form.comboBox_gain_7.setCurrentIndex(int(gain_index))
+            form.comboBox_gain_7.setEnabled(False)
+            self.module_receiver.receiver_gain_7 = 10*float(self.comboBox_gain.currentText())
+            form.comboBox_gain_8.setCurrentIndex(int(gain_index))
+            form.comboBox_gain_8.setEnabled(False)
+            self.module_receiver.receiver_gain_8 = 10*float(self.comboBox_gain.currentText())
         else:
             gain[0] = 10*float(self.comboBox_gain.currentText())
             gain[1] = 10*float(self.comboBox_gain_2.currentText())
             gain[2] = 10*float(self.comboBox_gain_3.currentText())
             gain[3] = 10*float(self.comboBox_gain_4.currentText())
+            gain[4] = 10*float(self.comboBox_gain_5.currentText())
+            gain[5] = 10*float(self.comboBox_gain_6.currentText())
+            gain[6] = 10*float(self.comboBox_gain_7.currentText())
+            gain[7] = 10*float(self.comboBox_gain_8.currentText())
             self.module_receiver.receiver_gain = 10*float(self.comboBox_gain.currentText())
             form.comboBox_gain_2.setEnabled(True)
             self.module_receiver.receiver_gain_2 = 10*float(self.comboBox_gain_2.currentText())
@@ -379,6 +418,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.module_receiver.receiver_gain_3 = 10*float(self.comboBox_gain_3.currentText())
             form.comboBox_gain_4.setEnabled(True)
             self.module_receiver.receiver_gain_4 = 10*float(self.comboBox_gain_4.currentText())
+            form.comboBox_gain_5.setEnabled(True)
+            self.module_receiver.receiver_gain_5 = 10*float(self.comboBox_gain_5.currentText())
+            form.comboBox_gain_6.setEnabled(True)
+            self.module_receiver.receiver_gain_6 = 10*float(self.comboBox_gain_6.currentText())
+            form.comboBox_gain_7.setEnabled(True)
+            self.module_receiver.receiver_gain_7 = 10*float(self.comboBox_gain_7.currentText())
+            form.comboBox_gain_8.setEnabled(True)
+            self.module_receiver.receiver_gain_8 = 10*float(self.comboBox_gain_8.currentText())
 
         self.module_receiver.fs = float(self.comboBox_sampling_freq.currentText())*10**6 #self.doubleSpinBox_sampling_freq.value()*10**6
         self.module_signal_processor.fs = self.module_receiver.fs/self.module_receiver.decimation_ratio
@@ -562,6 +609,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         xw2 = self.module_signal_processor.spectrum[2,:]
         xw3 = self.module_signal_processor.spectrum[3,:]
         xw4 = self.module_signal_processor.spectrum[4,:]
+        xw5 = self.module_signal_processor.spectrum[5,:]
+        xw6 = self.module_signal_processor.spectrum[6,:]
+        xw7 = self.module_signal_processor.spectrum[7,:]
+        xw8 = self.module_signal_processor.spectrum[8,:]
         freqs = self.module_signal_processor.spectrum[0,:]
         spectrum_dynamic_range = 10
 
@@ -569,6 +620,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.spectrum_ch2_curve.setData(freqs, xw2)
         self.spectrum_ch3_curve.setData(freqs, xw3)
         self.spectrum_ch4_curve.setData(freqs, xw4)
+        self.spectrum_ch5_curve.setData(freqs, xw5)
+        self.spectrum_ch6_curve.setData(freqs, xw6)
+        self.spectrum_ch7_curve.setData(freqs, xw7)
+        self.spectrum_ch8_curve.setData(freqs, xw8)
 
         currentTime = time.time()
         if((currentTime - self.spectrum_time) > 0.5):
@@ -580,16 +635,28 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         xcorr12 = 10*np.log10(np.abs(self.module_signal_processor.xcorr[0,:]))
         xcorr13 = 10*np.log10(np.abs(self.module_signal_processor.xcorr[1,:]))
         xcorr14 = 10*np.log10(np.abs(self.module_signal_processor.xcorr[2,:]))
+        xcorr15 = 10*np.log10(np.abs(self.module_signal_processor.xcorr[3,:]))
+        xcorr16 = 10*np.log10(np.abs(self.module_signal_processor.xcorr[4,:]))
+        xcorr17 = 10*np.log10(np.abs(self.module_signal_processor.xcorr[5,:]))
+        xcorr18 = 10*np.log10(np.abs(self.module_signal_processor.xcorr[6,:]))
 
         phasor12 =self.module_signal_processor.phasors[0,:]
         phasor13 =self.module_signal_processor.phasors[1,:]
         phasor14 =self.module_signal_processor.phasors[2,:]
+        phasor15 =self.module_signal_processor.phasors[3,:]
+        phasor16 =self.module_signal_processor.phasors[4,:]
+        phasor17 =self.module_signal_processor.phasors[5,:]
+        phasor18 =self.module_signal_processor.phasors[6,:]
 
         N = np.size(xcorr12)//2
 
         xcorr12 -= np.max(xcorr12)
         xcorr13 -= np.max(xcorr13)
         xcorr14 -= np.max(xcorr14)
+        xcorr15 -= np.max(xcorr15)
+        xcorr16 -= np.max(xcorr16)
+        xcorr17 -= np.max(xcorr17)
+        xcorr18 -= np.max(xcorr18)
 
         #phasor12 /= np.max(np.abs(phasor12))
         #phasor13 /= np.max(np.abs(phasor13))
@@ -1027,10 +1094,14 @@ def init():
     center_freq = form.doubleSpinBox_center_freq.value()
     samp_index = int(form.comboBox_sampling_freq.currentIndex())
     uniform_gain = form.checkBox_en_uniform_gain.checkState()
-    gain_index = int(form.comboBox_gain.currentIndex())
+    gain_index   = int(form.comboBox_gain.currentIndex())
     gain_index_2 = int(form.comboBox_gain_2.currentIndex())
     gain_index_3 = int(form.comboBox_gain_3.currentIndex())
     gain_index_4 = int(form.comboBox_gain_4.currentIndex())
+    gain_index_5 = int(form.comboBox_gain_5.currentIndex())
+    gain_index_6 = int(form.comboBox_gain_6.currentIndex())
+    gain_index_7 = int(form.comboBox_gain_7.currentIndex())
+    gain_index_8 = int(form.comboBox_gain_8.currentIndex())
     dc_comp = form.checkBox_en_dc_compensation.checkState()
     filt_bw = form.doubleSpinBox_filterbw.value()
     fir_size = form.spinBox_fir_tap_size.value()
@@ -1071,6 +1142,14 @@ def do_init():
             form.comboBox_gain_3.setCurrentIndex(int(gain_index))
             gain_index_4 = request.forms.get('gain')
             form.comboBox_gain_4.setCurrentIndex(int(gain_index))
+            gain_index_5 = request.forms.get('gain')
+            form.comboBox_gain_5.setCurrentIndex(int(gain_index))
+            gain_index_6 = request.forms.get('gain')
+            form.comboBox_gain_6.setCurrentIndex(int(gain_index))
+            gain_index_7 = request.forms.get('gain')
+            form.comboBox_gain_7.setCurrentIndex(int(gain_index))
+            gain_index_8 = request.forms.get('gain')
+            form.comboBox_gain_8.setCurrentIndex(int(gain_index))
         else:
             gain_index = request.forms.get('gain')
             form.comboBox_gain.setCurrentIndex(int(gain_index))
@@ -1080,6 +1159,14 @@ def do_init():
             form.comboBox_gain_3.setCurrentIndex(int(gain_index_3))
             gain_index_4 = request.forms.get('gain_4')
             form.comboBox_gain_4.setCurrentIndex(int(gain_index_4))
+            gain_index_5 = request.forms.get('gain_5')
+            form.comboBox_gain_5.setCurrentIndex(int(gain_index_5))
+            gain_index_6 = request.forms.get('gain_6')
+            form.comboBox_gain_6.setCurrentIndex(int(gain_index_6))
+            gain_index_7 = request.forms.get('gain_7')
+            form.comboBox_gain_7.setCurrentIndex(int(gain_index_7))
+            gain_index_8 = request.forms.get('gain_8')
+            form.comboBox_gain_8.setCurrentIndex(int(gain_index_8))
 
         form.pb_rec_reconfig_clicked()
 
