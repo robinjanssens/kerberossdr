@@ -307,7 +307,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.mqtt_client_name = 'base_station_42'
         self.mqtt_channel = 'dev'
         self.mqtt_client = mqtt.Client(self.mqtt_client_name) # create new instance
-        self.mqtt_client.on_connect = self.on_connect # attach function to callback
         try:
             print('connecting to broker '+self.mqtt_broker_address)
             self.mqtt_client.connect(self.mqtt_broker_address) # connect to broker
