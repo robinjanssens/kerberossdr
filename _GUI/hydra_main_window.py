@@ -303,12 +303,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # ------------------------------
         # Initialize MQTT
         # ------------------------------
-        self.mqtt_broker_adress = '192.168.1.45'
+        self.mqtt_broker_address = '192.168.1.45'
         self.mqtt_client_name = 'base_station_42'
         self.mqtt_channel = 'dev'
         self.mqtt_client = mqtt.Client(self.mqtt_client_name) # create new instance
+        print('connecting to broker '+self.mqtt_broker_address)
         try:
-            print('connecting to broker '+self.mqtt_broker_address)
             self.mqtt_client.connect(self.mqtt_broker_address) # connect to broker
             self.mqtt_client.loop_start()
         except:
