@@ -262,11 +262,14 @@ int main( int argc, char** argv )
 
     // Allocation
     rtl_receivers = malloc(sizeof(struct rtl_rec_struct)*NUM_CH);
+    char serial[9]; // 8 chars + end of string char
     for(int i=0; i<NUM_CH; i++)
     {
         struct rtl_rec_struct *rtl_rec = &rtl_receivers[i];        
         memset(rtl_rec, 0, sizeof(struct rtl_rec_struct));
-        rtl_rec->dev_ind = i;        
+        sprintf(serial, "%08d", i+1); // convert i to string representation of serial i=0 -> serial=00000001
+        rtl_rec->dev_ind = rtlsdr_get_index_by_serial(serial);
+        fprintf(stderr, "[ INFO ] rtl-sdr serial %s on index %d\n", serial, rtl_rec->dev_ind);
     }
    
     // Initialization
