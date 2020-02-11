@@ -1,0 +1,10 @@
+bottle
+cairocffi
+matplotlib
+numpy
+paste
+peakutils
+pyapril
+pyargus
+pyqtgraph
+scipy
