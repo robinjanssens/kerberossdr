@@ -41,6 +41,7 @@ or manual
   `pip3 install peakutils`<br>
   `pip3 install bottle`<br>
   `pip3 install paste`<br>
+  `pip3 install paho-mqtt`<br>
 
 4. <h4>Install RTL-SDR-Kerberos Drivers</h4>
 
