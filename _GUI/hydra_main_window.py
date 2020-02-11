@@ -754,7 +754,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             # Prepare data
             # ------------------------------
             packet = {}
-            packet['uid'] = str(random.randint(0, 999999))
+            packet['device_uid'] = 'mock_device'
+            packet['packet_uid'] = str(random.randint(0, 999999))
             packet['payload'] = 'lorem ipsum'
             packet['angle'] = np.angle(DOA_avg_c)
             packet['confidence'] = confidence_sum
