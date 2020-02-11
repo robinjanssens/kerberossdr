@@ -2,6 +2,7 @@ bottle
 cairocffi
 matplotlib
 numpy
+paho-mqtt
 paste
 peakutils
 pyapril
