@@ -98,7 +98,7 @@ void * fifo_read_tf(void* arg)
     int gain_read_7 = GAIN;
     int gain_read_8 = GAIN;
 
-    int gain_read_array[4];
+    int gain_read_array[NUM_CH];
 
     uint32_t center_freq_read = CENTER_FREQ, sample_rate_read = SAMPLE_RATE;
     FILE * fd = fopen(CFN, "r"); // FIFO descriptor    
@@ -258,7 +258,7 @@ return NULL;
 
 int main( int argc, char** argv )
 {
-    static char buf[262144 * 4 * 30];
+    static char buf[262144 * NUM_CH * 30];
 
     setvbuf(stdout, buf, _IOFBF, sizeof(buf));
     fprintf(stderr, "[ INFO ] Starting multichannel coherent RTL-SDR receiver\n");

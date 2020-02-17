@@ -107,7 +107,7 @@ class ReceiverRTLSDR():
         #print("[ INFO ] Python rec: Setting sample offset")
         delays = [0] + (sample_offsets.tolist())
         self.sync_fifo_descriptor.write(self.sync_delay_byte)
-        self.sync_fifo_descriptor.write(pack("i"*4,*delays))
+        self.sync_fifo_descriptor.write(pack("i"*self.channel_number,*delays))
     
     def reconfigure_tuner(self, center_freq, sample_rate, gain):
         #print("[ INFO ] Python rec: Setting receiver center frequency to:",center_freq)

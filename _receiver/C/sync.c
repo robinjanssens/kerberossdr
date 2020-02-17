@@ -101,7 +101,7 @@ void * fifo_read_tf(void* arg)
 int main(int argc, char** argv)
 {    
 
-    static char buf[262144 * 4 * 30];
+    static char buf[262144 * CHANNEL_NO * 30];
 
     setvbuf(stdout, buf, _IOFBF, sizeof(buf));
 
