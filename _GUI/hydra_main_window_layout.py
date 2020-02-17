@@ -1017,7 +1017,7 @@ class Ui_MainWindow(object):
         self.comboBox_gain_4.setItemText(27, _translate("KerberosSDR", "48.0", None))
         self.comboBox_gain_4.setItemText(28, _translate("KerberosSDR", "49.6", None))
 
-        self.label_gain_5.setText(_translate("KerberosSDR", "RX4 Gain [dB]:", None))
+        self.label_gain_5.setText(_translate("KerberosSDR", "RX5 Gain [dB]:", None))
         self.comboBox_gain_5.setItemText(0, _translate("KerberosSDR", "0", None))
         self.comboBox_gain_5.setItemText(1, _translate("KerberosSDR", "0.9", None))
         self.comboBox_gain_5.setItemText(2, _translate("KerberosSDR", "1.4", None))
@@ -1048,7 +1048,7 @@ class Ui_MainWindow(object):
         self.comboBox_gain_5.setItemText(27, _translate("KerberosSDR", "48.0", None))
         self.comboBox_gain_5.setItemText(28, _translate("KerberosSDR", "49.6", None))
 
-        self.label_gain_6.setText(_translate("KerberosSDR", "RX4 Gain [dB]:", None))
+        self.label_gain_6.setText(_translate("KerberosSDR", "RX6 Gain [dB]:", None))
         self.comboBox_gain_6.setItemText(0, _translate("KerberosSDR", "0", None))
         self.comboBox_gain_6.setItemText(1, _translate("KerberosSDR", "0.9", None))
         self.comboBox_gain_6.setItemText(2, _translate("KerberosSDR", "1.4", None))
@@ -1079,7 +1079,7 @@ class Ui_MainWindow(object):
         self.comboBox_gain_6.setItemText(27, _translate("KerberosSDR", "48.0", None))
         self.comboBox_gain_6.setItemText(28, _translate("KerberosSDR", "49.6", None))
 
-        self.label_gain_7.setText(_translate("KerberosSDR", "RX4 Gain [dB]:", None))
+        self.label_gain_7.setText(_translate("KerberosSDR", "RX7 Gain [dB]:", None))
         self.comboBox_gain_7.setItemText(0, _translate("KerberosSDR", "0", None))
         self.comboBox_gain_7.setItemText(1, _translate("KerberosSDR", "0.9", None))
         self.comboBox_gain_7.setItemText(2, _translate("KerberosSDR", "1.4", None))
@@ -1110,7 +1110,7 @@ class Ui_MainWindow(object):
         self.comboBox_gain_7.setItemText(27, _translate("KerberosSDR", "48.0", None))
         self.comboBox_gain_7.setItemText(28, _translate("KerberosSDR", "49.6", None))
 
-        self.label_gain_8.setText(_translate("KerberosSDR", "RX4 Gain [dB]:", None))
+        self.label_gain_8.setText(_translate("KerberosSDR", "RX8 Gain [dB]:", None))
         self.comboBox_gain_8.setItemText(0, _translate("KerberosSDR", "0", None))
         self.comboBox_gain_8.setItemText(1, _translate("KerberosSDR", "0.9", None))
         self.comboBox_gain_8.setItemText(2, _translate("KerberosSDR", "1.4", None))
