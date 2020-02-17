@@ -121,6 +121,22 @@ class Ui_MainWindow(object):
         self.label_gain_4.setObjectName(_fromUtf8("label_gain_4"))
         self.gridLayout_16.addWidget(self.label_gain_4, 6, 0, 1, 1)
 
+        self.label_gain_5 = QtGui.QLabel(self.groupBox_7)
+        self.label_gain_5.setObjectName(_fromUtf8("label_gain_5"))
+        self.gridLayout_16.addWidget(self.label_gain_5, 7, 0, 1, 1)
+
+        self.label_gain_6 = QtGui.QLabel(self.groupBox_7)
+        self.label_gain_6.setObjectName(_fromUtf8("label_gain_6"))
+        self.gridLayout_16.addWidget(self.label_gain_6, 8, 0, 1, 1)
+
+
+        self.label_gain_7 = QtGui.QLabel(self.groupBox_7)
+        self.label_gain_7.setObjectName(_fromUtf8("label_gain_7"))
+        self.gridLayout_16.addWidget(self.label_gain_7, 9, 0, 1, 1)
+
+        self.label_gain_8 = QtGui.QLabel(self.groupBox_7)
+        self.label_gain_8.setObjectName(_fromUtf8("label_gain_8"))
+        self.gridLayout_16.addWidget(self.label_gain_8, 10, 0, 1, 1)
 
 
         self.comboBox_gain = QtGui.QComboBox(self.groupBox_7)
