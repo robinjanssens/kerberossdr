@@ -77,7 +77,7 @@ int last_noise_source_state = 0;
 
 unsigned int read_buff_ind = 0;
 
-bool writeOrder[4];
+bool writeOrder[NUM_CH];
 
 unsigned int writeCount = 0;
 
