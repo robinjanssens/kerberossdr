@@ -3,7 +3,7 @@
 # ------------------------------
 build/
 views/static/
-log_*
+*.log
 *.so
 *.o
 gate_control_fifo
