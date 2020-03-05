@@ -675,6 +675,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.plotWidget_sync_absx.plot(delay_label, xcorr12[N-M:N+M+1], pen=(255, 199, 15))
         self.plotWidget_sync_absx.plot(delay_label, xcorr13[N-M:N+M+1], pen='r')
         self.plotWidget_sync_absx.plot(delay_label, xcorr14[N-M:N+M+1], pen='g')
+        self.plotWidget_sync_absx.plot(delay_label, xcorr15[N-M:N+M+1], pen=(255, 199, 15))
+        self.plotWidget_sync_absx.plot(delay_label, xcorr16[N-M:N+M+1], pen='r')
+        self.plotWidget_sync_absx.plot(delay_label, xcorr17[N-M:N+M+1], pen='g')
+        self.plotWidget_sync_absx.plot(delay_label, xcorr18[N-M:N+M+1], pen=(255, 199, 15))
 
         # Plot delay history
 
@@ -683,6 +687,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.plotWidget_sync_sampd.plot(self.module_signal_processor.delay_log[0,:], pen=(255, 199, 15))
         self.plotWidget_sync_sampd.plot(self.module_signal_processor.delay_log[1,:], pen='r')
         self.plotWidget_sync_sampd.plot(self.module_signal_processor.delay_log[2,:], pen='g')
+        self.plotWidget_sync_sampd.plot(self.module_signal_processor.delay_log[3,:], pen=(255, 199, 15))
+        self.plotWidget_sync_sampd.plot(self.module_signal_processor.delay_log[4,:], pen='r')
+        self.plotWidget_sync_sampd.plot(self.module_signal_processor.delay_log[5,:], pen='g')
+        self.plotWidget_sync_sampd.plot(self.module_signal_processor.delay_log[6,:], pen=(255, 199, 15))
 
 
         # Plot phasors
@@ -699,6 +707,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.plotWidget_sync_phasediff.plot(self.module_signal_processor.phase_log[0,:], pen=(255, 199, 15))
         self.plotWidget_sync_phasediff.plot(self.module_signal_processor.phase_log[1,:], pen='r')
         self.plotWidget_sync_phasediff.plot(self.module_signal_processor.phase_log[2,:], pen='g')
+        self.plotWidget_sync_phasediff.plot(self.module_signal_processor.phase_log[3,:], pen=(255, 199, 15))
+        self.plotWidget_sync_phasediff.plot(self.module_signal_processor.phase_log[4,:], pen='r')
+        self.plotWidget_sync_phasediff.plot(self.module_signal_processor.phase_log[5,:], pen='g')
+        self.plotWidget_sync_phasediff.plot(self.module_signal_processor.phase_log[6,:], pen=(255, 199, 15))
 
         currentTime = time.time()
         if((currentTime - self.sync_time) > 0.5):
