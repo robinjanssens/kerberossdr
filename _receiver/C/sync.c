@@ -75,7 +75,7 @@ void * fifo_read_tf(void* arg)
         else if( (char) signal == 'd')
         {
             //fprintf(stderr,"Signal 'd': Updating delay values \n");
-            fread(delays, sizeof(*delays), 4, fd);
+            fread(delays, sizeof(*delays), CHANNEL_NO, fd);
             for(int m=0; m < CHANNEL_NO; m++)     
                 if(abs(delays[m]) < BUFFER_SIZE)
                 {
