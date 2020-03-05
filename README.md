@@ -25,6 +25,12 @@
 
 3. <h4>Install Dependencies via pip3:</h4>
 
+Using requirements.txt
+
+  `pip3 install -r requirements.txt`
+
+or manual
+
   `pip3 install numpy`<br>
   `pip3 install matplotlib`<br>
   `pip3 install scipy`<br>
@@ -35,6 +41,7 @@
   `pip3 install peakutils`<br>
   `pip3 install bottle`<br>
   `pip3 install paste`<br>
+  `pip3 install paho-mqtt`<br>
 
 4. <h4>Install RTL-SDR-Kerberos Drivers</h4>
 

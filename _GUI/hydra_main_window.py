@@ -29,6 +29,9 @@ import scipy
 from bottle import route, run, request, get, post, redirect, template, static_file
 import threading
 import subprocess
+import paho.mqtt.client as mqtt
+import json
+import random
 
 np.seterr(divide='ignore')
 
@@ -314,6 +317,20 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         self.ip_addr = sys.argv[2]
         threading.Thread(target=run, kwargs=dict(host=self.ip_addr, port=8080, quiet=True, debug=False, server='paste')).start()
+
+        # ------------------------------
+        # Initialize MQTT
+        # ------------------------------
+        self.mqtt_broker_address = '192.168.1.45'
+        self.mqtt_client_name = 'base_station_42'
+        self.mqtt_channel = 'dev'
+        self.mqtt_client = mqtt.Client(self.mqtt_client_name) # create new instance
+        print('connecting to broker '+self.mqtt_broker_address)
+        try:
+            self.mqtt_client.connect(self.mqtt_broker_address) # connect to broker
+            self.mqtt_client.loop_start()
+        except:
+            print('connecting to mosquitto failed')
 
     #-----------------------------------------------------------------
     #
@@ -811,6 +828,25 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             DOA_avg_c = np.average(DOA_results_c)
             # Convert back to degree
             DOA = np.rad2deg(np.angle(DOA_avg_c))
+
+            # ------------------------------
+            # Prepare data
+            # ------------------------------
+            packet = {}
+            packet['device_uid'] = 'mock_device'
+            packet['packet_uid'] = str(random.randint(0, 999999))
+            packet['payload'] = 'lorem ipsum'
+            packet['angle'] = np.angle(DOA_avg_c)
+            packet['confidence'] = confidence_sum
+
+            # ------------------------------
+            # Send to MQTT Broker
+            # ------------------------------
+            self.mqtt_topic = self.mqtt_channel+'/base_station_42'
+            try:
+                self.mqtt_client.publish(self.mqtt_topic,json.dumps(packet))
+            except:
+                print('publishing failed')
 
             # Update DOA results on the compass display
             #print("[ INFO ] Python GUI: DOA results :",DOA_results)
