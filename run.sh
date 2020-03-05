@@ -5,15 +5,15 @@ IPADDR="0.0.0.0"
 IPPORT="8081"
 
 # set to /dev/null for no logging, set to some file for logfile. You can also set it to the same file. 
-#RTLDAQLOG="rtl_daq.log"
-#SYNCLOG="sync.log"
-#GATELOG="gate.log"
-#PYTHONLOG="python.log"
+RTLDAQLOG="rtl_daq.log"
+SYNCLOG="sync.log"
+GATELOG="gate.log"
+PYTHONLOG="python.log"
 
-RTLDAQLOG="/dev/null"
-SYNCLOG="/dev/null"
-GATELOG="/dev/null"
-PYTHONLOG="/dev/null"
+# RTLDAQLOG="/dev/null"
+# SYNCLOG="/dev/null"
+# GATELOG="/dev/null"
+# PYTHONLOG="/dev/null"
 
 # If you want to kill all matching processes on startup without prompt. Otherwise, set it to anything else. 
 FORCE_KILL="yes"
