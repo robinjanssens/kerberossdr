@@ -865,10 +865,16 @@ def init_settings():
     form.doubleSpinBox_center_freq.setProperty("value", center_freq)
     form.comboBox_sampling_freq.setCurrentIndex(int(samp_index))
     form.checkBox_en_uniform_gain.setChecked(True if uniform_gain=="on" else False)
-    form.comboBox_gain.setCurrentIndex(int(gain_index))
-    form.comboBox_gain_2.setCurrentIndex(int(gain_index))
-    form.comboBox_gain_3.setCurrentIndex(int(gain_index))
-    form.comboBox_gain_4.setCurrentIndex(int(gain_index))
+    if uniform_gain == "on": 
+        form.comboBox_gain.setCurrentIndex(int(gain_index))
+        form.comboBox_gain_2.setCurrentIndex(int(gain_index))
+        form.comboBox_gain_3.setCurrentIndex(int(gain_index))
+        form.comboBox_gain_4.setCurrentIndex(int(gain_index))
+    else:
+        form.comboBox_gain.setCurrentIndex(int(gain_index))
+        form.comboBox_gain_2.setCurrentIndex(int(gain_index_2))
+        form.comboBox_gain_3.setCurrentIndex(int(gain_index_3))
+        form.comboBox_gain_4.setCurrentIndex(int(gain_index_4))
 
 
     # IQ Preprocessing
