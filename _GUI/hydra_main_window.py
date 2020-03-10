@@ -309,8 +309,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # ------------------------------
         # Initialize MQTT
         # ------------------------------
-        self.mqtt_broker_address = '192.168.1.45'
-        self.mqtt_client_name = 'base_station_42'
+        # self.mqtt_broker_address = "192.168.1.45" # loaded from settings
+        self.mqtt_client_name = 'base_station_'+str(self.gateway)
         self.mqtt_channel = 'dev'
         self.mqtt_client = mqtt.Client(self.mqtt_client_name) # create new instance
         print('connecting to broker '+self.mqtt_broker_address)
@@ -775,7 +775,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             # ------------------------------
             # Send to MQTT Broker
             # ------------------------------
-            self.mqtt_topic = self.mqtt_channel+'/base_station_42'
+            self.mqtt_topic = self.mqtt_channel+'/base_station_'+str(self.gateway_id)
             try:
                 self.mqtt_client.publish(self.mqtt_topic,json.dumps(packet))
             except:
@@ -977,6 +977,12 @@ def init_settings():
     form.spinBox_cfar_guard_win.setProperty("value", guard_win)
     form.doubleSpinBox_cfar_threshold.setProperty("value", thresh_det)
     form.checkBox_en_peakhold.setChecked(True if en_peakhold=="on" else False)
+
+    # MQTT
+    gateway_id = settings.gateway_id
+    mqtt_broker_address = settings.mqtt_broker_address
+
+    # TODO: set input boxes in form
 
 
 def reboot_program():

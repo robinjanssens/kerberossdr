@@ -33,5 +33,7 @@
     "est_win": "10",
     "guard_win": "4",
     "thresh_det": "13.0",
-    "en_peakhold": null
+    "en_peakhold": null,
+    "gateway_id": "5",
+    "mqtt_broker_address": "192.168.1.45"
 }
