@@ -49,7 +49,8 @@ gcc -std=c99 rtl_rec.h rtl_daq.c -lpthread -lrtlsdr -o rtl_daq
 // TODO: Remove unnecessary includes
 #include "rtl_rec.h"
 
-#define NUM_CH 4  // Number of receiver channels
+#define NUM_CH 4  // Number of receiver active channels
+#define NUM_RTLS 8 // Number of connected RTL devices
 #define NUM_BUFF 1 // Number of buffers
 //#define BUFF_LEN (16*16384) //(16 * 16384)
 #define SAMPLE_RATE 2000000
@@ -77,7 +78,7 @@ int last_noise_source_state = 0;
 
 unsigned int read_buff_ind = 0;
 
-bool writeOrder[4];
+bool writeOrder[NUM_RTLS];
 
 unsigned int writeCount = 0;
 
@@ -202,7 +203,12 @@ void rtlsdrCallback(unsigned char *buf, uint32_t len, void *ctx)
         writeOrder[rtl_rec->dev_ind] = true;
     	memcpy(rtl_rec->buffer, buf, len);
         //fprintf(stderr, "Read_buff_ind:%d, rtl_recbuff_ind:%d\n",rtl_rec->buff_ind, rtl_rec->buff_ind);
-        if(writeOrder[0] && writeOrder[1] && writeOrder[2] && writeOrder[3])
+        int writeOrder_count = 0;
+        for (int i=0; i<NUM_RTLS; i++)
+        {
+            writeOrder_count += writeOrder[i];
+        }   
+        if(writeOrder_count >= NUM_CH)
         {
            pthread_cond_signal(&buff_ind_cond);
         }
@@ -270,11 +276,9 @@ int main( int argc, char** argv )
     //setvbuf(stdout, NULL, _IOFBF, 0);
     fprintf(stderr, "[ INFO ] Starting multichannel coherent RTL-SDR receiver\n");
 
-
-    writeOrder[0] = false;
-    writeOrder[1] = false;
-    writeOrder[2] = false;
-    writeOrder[3] = false;
+    for (int i=0; i<NUM_RTLS; i++) {
+        writeOrder[i] = false;
+    }
 
 
     BUFF_LEN = (atoi(argv[1])/16) * 16384;
