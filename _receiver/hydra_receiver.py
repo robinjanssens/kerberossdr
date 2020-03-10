@@ -82,17 +82,21 @@ class ReceiverRTLSDR():
             self.receiver_gain_2 = 0 # Gain in dB x 10 
             self.receiver_gain_3 = 0 # Gain in dB x 10 
             self.receiver_gain_4 = 0 # Gain in dB x 10 
+            self.receiver_gain_5 = 0 # Gain in dB x 10 
+            self.receiver_gain_6 = 0 # Gain in dB x 10 
+            self.receiver_gain_7 = 0 # Gain in dB x 10 
+            self.receiver_gain_8 = 0 # Gain in dB x 10 
             
             # Data acquisition parameters
-            self.channel_number = 4
-            self.block_size = 0; #128 * 1024 #256*1024
+            self.channel_number = 8
+            self.block_size = 0 #128 * 1024 #256*1024
                         
             self.overdrive_detect_flag = False
 
             # IQ preprocessing parameters
             self.en_dc_compensation = False
             self.fs = 1.024 * 10**6  # Sampling frequency
-            self.iq_corrections = np.array([1,1,1,1], dtype=np.complex64)  # Used for phase and amplitude correction
+            self.iq_corrections = np.array([1,1,1,1,1,1,1,1], dtype=np.complex64)  # Used for phase and amplitude correction
             self.fir_size = 0
             self.fir_bw = 1  # Normalized to sampling frequency 
             self.fir_filter_coeffs = np.empty(0)
@@ -103,20 +107,24 @@ class ReceiverRTLSDR():
         #print("[ INFO ] Python rec: Setting sample offset")
         delays = [0] + (sample_offsets.tolist())
         self.sync_fifo_descriptor.write(self.sync_delay_byte)
-        self.sync_fifo_descriptor.write(pack("i"*4,*delays))
+        self.sync_fifo_descriptor.write(pack("i"*self.channel_number,*delays))
     
     def reconfigure_tuner(self, center_freq, sample_rate, gain):
-       #print("[ INFO ] Python rec: Setting receiver center frequency to:",center_freq)
-       #print("[ INFO ] Python rec: Setting receiver sample rate to:",sample_rate)
-       #print("[ INFO ] Python rec: Setting receiver gain to:",gain)
-       self.rec_control_fifo_descriptor.write(self.reconfig_tuner_byte)    
-       self.rec_control_fifo_descriptor.write(pack("I", int(center_freq)))
-       self.rec_control_fifo_descriptor.write(pack("I", int(sample_rate)))
-       self.rec_control_fifo_descriptor.write(pack("i", int(gain[0])))
-       self.rec_control_fifo_descriptor.write(pack("i", int(gain[1])))
-       self.rec_control_fifo_descriptor.write(pack("i", int(gain[2])))
-       self.rec_control_fifo_descriptor.write(pack("i", int(gain[3])))
-    
+        #print("[ INFO ] Python rec: Setting receiver center frequency to:",center_freq)
+        #print("[ INFO ] Python rec: Setting receiver sample rate to:",sample_rate)
+        #print("[ INFO ] Python rec: Setting receiver gain to:",gain)
+        self.rec_control_fifo_descriptor.write(self.reconfig_tuner_byte)    
+        self.rec_control_fifo_descriptor.write(pack("I", int(center_freq)))
+        self.rec_control_fifo_descriptor.write(pack("I", int(sample_rate)))
+        self.rec_control_fifo_descriptor.write(pack("i", int(gain[0])))
+        self.rec_control_fifo_descriptor.write(pack("i", int(gain[1])))
+        self.rec_control_fifo_descriptor.write(pack("i", int(gain[2])))
+        self.rec_control_fifo_descriptor.write(pack("i", int(gain[3])))
+        self.rec_control_fifo_descriptor.write(pack("i", int(gain[4])))
+        self.rec_control_fifo_descriptor.write(pack("i", int(gain[5])))
+        self.rec_control_fifo_descriptor.write(pack("i", int(gain[6])))
+        self.rec_control_fifo_descriptor.write(pack("i", int(gain[7])))
+        
     def switch_noise_source(self, state):
         if state:
             #print("[ INFO ] Python rec: Turning on noise source")

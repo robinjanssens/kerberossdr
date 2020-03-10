@@ -24,10 +24,10 @@
 #include <semaphore.h>
 
 
-//#define BUFFER_SIZE 1024 * 128 * 4//1024*256*4
+//#define BUFFER_SIZE 1024 * 128 * 8//1024*256*4
 #define CFN "_receiver/C/gate_control_fifo" // Name of the gate control fifo - Control FIFO name
 
-//#define BUFFER_SIZE 256 * 1024 * 4
+//#define BUFFER_SIZE 256 * 1024 * 8
 
 int BUFFER_SIZE = 0;
 
@@ -69,11 +69,11 @@ void * fifo_read_tf(void* arg)
 int main(int argc, char** argv)
 {
 
-    //static char buf[262144 * 4 * 30];
+    //static char buf[262144 * 8 * 30];
     //setvbuf(stdout, buf, _IOFBF, sizeof(buf));
 
 
-    BUFFER_SIZE = atoi(argv[1]) * 1024 * 4;
+    BUFFER_SIZE = atoi(argv[1]) * 1024 * 8;
 
     int read_size;
     uint8_t * buffer;    

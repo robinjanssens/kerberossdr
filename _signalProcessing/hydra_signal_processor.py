@@ -114,11 +114,15 @@ class SignalProcessor(QtCore.QThread):
         self.RD_matrix_last = np.ones((10,10))
         self.RD_matrix_last_2 = np.ones((10,10))
         self.RD_matrix_last_3 = np.ones((10,10))
+        self.RD_matrix_last_4 = np.ones((10,10))
+        self.RD_matrix_last_5 = np.ones((10,10))
+        self.RD_matrix_last_6 = np.ones((10,10))
+        self.RD_matrix_last_7 = np.ones((10,10))
         
         self.center_freq = 0  # TODO: Initialize this [Hz]
         self.fs = 1.024 * 10**6  # Decimated sampling frequncy - Update from GUI
         #self.sample_size = 2**15
-        self.channel_number = 4
+        self.channel_number = 8
         
         # Processing parameters        
         self.test = None
@@ -132,8 +136,8 @@ class SignalProcessor(QtCore.QThread):
         self.run_processing = False
         
         # Result vectors
-        self.delay_log= np.array([[0],[0],[0]])
-        self.phase_log= np.array([[0],[0],[0]])
+        self.delay_log= np.array([[0],[0],[0],[0],[0],[0],[0]])
+        self.phase_log= np.array([[0],[0],[0],[0],[0],[0],[0]])
         self.DOA_Bartlett_res = np.ones(181)
         self.DOA_Capon_res = np.ones(181)
         self.DOA_MEM_res = np.ones(181)
@@ -207,9 +211,9 @@ class SignalProcessor(QtCore.QThread):
             if self.en_calib_DOA_90:
                 #TODO: Experimental only for UCA, implement this properly!
                 # This calibration is currently done for 0 deg not 90 
-                x = self.DOA_inter_elem_space * np.cos(2*np.pi/4 * np.arange(4))
-                y = self.DOA_inter_elem_space * np.sin(-2*np.pi/4 * np.arange(4)) # For this specific array only
-                ref_vector = de.gen_scanning_vectors(4, x, y, np.zeros(1))[:, 0]                
+                x = self.DOA_inter_elem_space * np.cos(2*np.pi/8 * np.arange(8))
+                y = self.DOA_inter_elem_space * np.sin(-2*np.pi/8 * np.arange(8)) # For this specific array only
+                ref_vector = de.gen_scanning_vectors(8, x, y, np.zeros(1))[:, 0]                
                 #ref_vector = np.exp(1j*2*np.pi*0.5*np.cos(np.radians(0-np.arange(self.channel_number)*(360)/self.channel_number))) # UCA                
                 N= np.size(self.module_receiver.iq_samples[0, :])
                 for m in range(self.channel_number):
@@ -267,8 +271,8 @@ class SignalProcessor(QtCore.QThread):
         N = self.xcorr_sample_size
         iq_samples = self.module_receiver.iq_samples[:, 0:N]
        
-        delays = np.array([[0],[0],[0]])
-        phases = np.array([[0],[0],[0]])
+        delays = np.array([[0],[0],[0],[0],[0],[0],[0]])
+        phases = np.array([[0],[0],[0],[0],[0],[0],[0]])
         # Channel matching
         np_zeros = np.zeros(N, dtype=np.complex64)
         x_padd = np.concatenate([iq_samples[0, :], np_zeros])
@@ -301,8 +305,8 @@ class SignalProcessor(QtCore.QThread):
         self.phase_log = np.concatenate((self.phase_log, phases),axis=1)
     
     def delete_sync_history(self):
-        self.delay_log= np.array([[0],[0],[0]])
-        self.phase_log= np.array([[0],[0],[0]])
+        self.delay_log= np.array([[0],[0],[0],[0],[0],[0],[0]])
+        self.phase_log= np.array([[0],[0],[0],[0],[0],[0],[0]])
     
 
     def estimate_DOA(self):

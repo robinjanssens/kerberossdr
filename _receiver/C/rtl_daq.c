@@ -49,7 +49,7 @@ gcc -std=c99 rtl_rec.h rtl_daq.c -lpthread -lrtlsdr -o rtl_daq
 // TODO: Remove unnecessary includes
 #include "rtl_rec.h"
 
-#define NUM_CH 4  // Number of receiver active channels
+#define NUM_CH 8  // Number of receiver active channels
 #define NUM_RTLS 8 // Number of connected RTL devices
 #define NUM_BUFF 1 // Number of buffers
 //#define BUFF_LEN (16*16384) //(16 * 16384)
@@ -94,8 +94,12 @@ void * fifo_read_tf(void* arg)
     int gain_read_2 = GAIN;
     int gain_read_3 = GAIN;
     int gain_read_4 = GAIN;
+    int gain_read_5 = GAIN;
+    int gain_read_6 = GAIN;
+    int gain_read_7 = GAIN;
+    int gain_read_8 = GAIN;
 
-    int gain_read_array[4];
+    int gain_read_array[NUM_CH];
 
     uint32_t center_freq_read = CENTER_FREQ, sample_rate_read = SAMPLE_RATE;
     FILE * fd = fopen(CFN, "r"); // FIFO descriptor    
@@ -133,11 +137,19 @@ void * fifo_read_tf(void* arg)
             fread(&gain_read_2, sizeof(int), 1, fd);
             fread(&gain_read_3, sizeof(int), 1, fd);
             fread(&gain_read_4, sizeof(int), 1, fd);
+            fread(&gain_read_5, sizeof(int), 1, fd);
+            fread(&gain_read_6, sizeof(int), 1, fd);
+            fread(&gain_read_7, sizeof(int), 1, fd);
+            fread(&gain_read_8, sizeof(int), 1, fd);
 
             gain_read_array[0] = gain_read;
             gain_read_array[1] = gain_read_2;
             gain_read_array[2] = gain_read_3;
             gain_read_array[3] = gain_read_4;
+            gain_read_array[4] = gain_read_5;
+            gain_read_array[5] = gain_read_6;
+            gain_read_array[6] = gain_read_7;
+            gain_read_array[7] = gain_read_8;
             
             //fprintf(stderr,"[ INFO ] Center freq: %u MHz\n", ((unsigned int) center_freq_read/1000000));
             //fprintf(stderr,"[ INFO ] Sample rate: %u MSps\n", ((unsigned int) sample_rate_read/1000000));
@@ -271,7 +283,7 @@ return NULL;
 
 int main( int argc, char** argv )
 {
-    //static char buf[262144 * 4 * 30];
+    //static char buf[262144 * NUM_CH * 30];
 
     //setvbuf(stdout, NULL, _IOFBF, 0);
     fprintf(stderr, "[ INFO ] Starting multichannel coherent RTL-SDR receiver\n");
@@ -381,7 +393,7 @@ int main( int argc, char** argv )
       //data_ready = 0;
       // Do we have new data ready for the processing?
 
-      //if(writeOrder[0] && writeOrder[1] && writeOrder[2] && writeOrder[3])
+      //if(writeOrder[0] && writeOrder[1] && writeOrder[2] && writeOrder[3] && writeOrder[4] && writeOrder[5] && writeOrder[6] && writeOrder[7])
       //{
           //fprintf(stderr, "[ INFO ] Writing data to stdout, buff ind:%lld \n",read_buff_ind);
 
@@ -409,7 +421,12 @@ int main( int argc, char** argv )
           /*writeOrder[0] = false;
           writeOrder[1] = false;
           writeOrder[2] = false;
-          writeOrder[3] = false;*/
+          writeOrder[3] = false;
+          writeOrder[3] = false;
+          writeOrder[4] = false;
+          writeOrder[5] = false;
+          writeOrder[6] = false;
+          writeOrder[7] = false;*/
           //fflush(stdout);
 
           /* We need to reconfigure the tuner, so the async read must be stopped*/
