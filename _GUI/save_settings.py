@@ -52,10 +52,6 @@ guard_win = settings.get("guard_win", "4")
 thresh_det = settings.get("thresh_det", "13.0")
 en_peakhold = settings.get("en_peakhold", None)
 
-# MQTT
-gateway_id = settings.get("gateway_id", "0")
-mqtt_broker_address = settings.get("mqtt_broker_address", "192.168.1.45")
-
 def write():
     data = {}
 
@@ -101,10 +97,6 @@ def write():
     data["guard_win"] = guard_win
     data["thresh_det"] = thresh_det
     data["en_peakhold"] = en_peakhold
-
-    # MQTT
-    data["gateway_id"] = gateway_id
-    data["mqtt_broker_address"] = mqtt_broker_address
 
     with open('settings.json', 'w') as outfile:
         json.dump(data, outfile)
